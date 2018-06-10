@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class App extends Application {
 
-    private static FlickrApi umoriliApi;
+    private static FlickrApi flickrApi;
     private Retrofit retrofit;
 
     @Override
@@ -25,10 +25,10 @@ public class App extends Application {
                 .baseUrl("https://api.flickr.com/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
-        umoriliApi = retrofit.create(FlickrApi.class);
+        flickrApi = retrofit.create(FlickrApi.class);
     }
 
     public static FlickrApi getApi() {
-        return umoriliApi;
+        return flickrApi;
     }
 }
