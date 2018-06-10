@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "573946874818",
+    "firebase_url": "https://testapp-1528567818423.firebaseio.com",
+    "project_id": "testapp-1528567818423",
+    "storage_bucket": "testapp-1528567818423.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:573946874818:android:7dda2655462563ea",
+        "android_client_info": {
+          "package_name": "ru.taximaster.testapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "573946874818-hnk72kjs93aeo2trbea1fc6b6fk9ghq3.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "573946874818-hnk72kjs93aeo2trbea1fc6b6fk9ghq3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAx6PPBCtvyIf72PvFA2OGBiYN_t9q0uq4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
