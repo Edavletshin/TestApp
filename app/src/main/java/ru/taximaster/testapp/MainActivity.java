@@ -4,14 +4,12 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +20,6 @@ import retrofit2.Response;
 import ru.taximaster.testapp.Adapters.MyPagerAdapter;
 import ru.taximaster.testapp.Fragments.MapFragment;
 import ru.taximaster.testapp.ImagesModel.ImagesModel;
-import ru.taximaster.testapp.ImagesModel.Photo;
 import ru.taximaster.testapp.LocationModel.Location;
 import ru.taximaster.testapp.LocationModel.LocationModel;
 
@@ -91,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
 
                 if (imagesModel!=null){
                     final int[] currentItem = {0};
-                    final List<Person> personList = new ArrayList<>();
-                    for (final Photo photo : imagesModel.getPhotos().getPhoto()){
+                    final List<Photo> photoList = new ArrayList<>();
+                    for (final ru.taximaster.testapp.ImagesModel.Photo photo : imagesModel.getPhotos().getPhoto()){
                         //зарпосы на получение локации фотографий
                         App.getApi().getLocation(API_KEY,photo.getId()).enqueue(new Callback<LocationModel>() {
                             @Override
@@ -105,14 +102,14 @@ public class MainActivity extends AppCompatActivity {
                                     String url = "http://farm" + photo.getFarm() + ".static.flickr.com/"
                                             + photo.getServer() + "/" + photo.getId() + "_" + photo.getSecret() + ".jpg";
 
-                                    personList.add(new Person(new LatLng(location.getLatitude(),location.getLongitude()),url));
+                                    photoList.add(new Photo(new LatLng(location.getLatitude(),location.getLongitude()),url));
                                 }
 
                                 if (currentItem[0]==imagesModel.getPhotos().getPhoto().size()){
                                     //если загружена последняя локация фотографий, то запускается фрагмент карты.
-                                    Toast.makeText(MainActivity.this, personList.size() + "/" + currentItem[0], Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, photoList.size() + "/" + currentItem[0], Toast.LENGTH_SHORT).show();
                                     pd.cancel();
-                                    getSupportFragmentManager().beginTransaction().replace(R.id.frame, MapFragment.newInstance(personList)).addToBackStack("").commit();
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.frame, MapFragment.newInstance(photoList)).addToBackStack("").commit();
                                 }
 
                             }

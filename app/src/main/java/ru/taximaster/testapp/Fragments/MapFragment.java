@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,18 +22,18 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import ru.taximaster.testapp.Person;
+import ru.taximaster.testapp.Photo;
 import ru.taximaster.testapp.R;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
-    private List<Person> personList;
-    private ClusterManager<Person> mClusterManager;
+    private List<Photo> photoList;
+    private ClusterManager<Photo> mClusterManager;
     private GoogleMap mMap;
 
-    public static MapFragment newInstance(List<Person> personList) {
+    public static MapFragment newInstance(List<Photo> photoList) {
         MapFragment fragment = new MapFragment();
-        fragment.personList = personList;
+        fragment.photoList = photoList;
         return fragment;
     }
 
@@ -58,7 +57,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void initCluster() {
-        mClusterManager = new ClusterManager<Person>(getActivity(), mMap);
+        mClusterManager = new ClusterManager<Photo>(getActivity(), mMap);
         mClusterManager.setRenderer(new PersonRenderer());
         mMap.setOnCameraIdleListener(mClusterManager);
         mMap.setOnMarkerClickListener(mClusterManager);
@@ -70,11 +69,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
 
     private void addItems() {
-        mClusterManager.addItems(personList);
+        mClusterManager.addItems(photoList);
     }
 
 
-    private class PersonRenderer extends DefaultClusterRenderer<Person> {
+    private class PersonRenderer extends DefaultClusterRenderer<Photo> {
         private final IconGenerator mIconGenerator = new IconGenerator(getActivity());
         private final ImageView mImageView;
         private final int mDimension;
@@ -91,10 +90,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
 
         @Override
-        protected void onBeforeClusterItemRendered(Person person, MarkerOptions markerOptions) {
+        protected void onBeforeClusterItemRendered(Photo photo, MarkerOptions markerOptions) {
 
             Picasso.get()
-                    .load(person.photoUrl)
+                    .load(photo.photoUrl)
                     .into(mImageView);
             Bitmap icon = mIconGenerator.makeIcon();
             markerOptions.icon(BitmapDescriptorFactory.fromBitmap(icon));

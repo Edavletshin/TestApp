@@ -3,11 +3,11 @@ package ru.taximaster.testapp;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.ClusterItem;
 
-public class Person implements ClusterItem {
+public class Photo implements ClusterItem {
     public final String photoUrl;
     private final LatLng mPosition;
 
-    public Person(LatLng position, String photoUrl) {
+    public Photo(LatLng position, String photoUrl) {
         mPosition = position;
         this.photoUrl = photoUrl;
     }
